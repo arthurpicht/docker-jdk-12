@@ -5,14 +5,14 @@ ENV JAVA_HOME /man/java
 ENV PATH $JAVA_HOME/bin:$PATH
 
 # TEMP: cache file locally, dev-time only
-COPY openjdk.tar.gz .
+# COPY openjdk.tar.gz .
 
 RUN set -eux; \
 	export OPENJDK_URL="https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_linux-x64_bin.tar.gz"; \
 	export OPENJDK_FILE=openjdk.tar.gz; \
 	export OPENJDK_SHA256_URL="https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_linux-x64_bin.tar.gz.sha256"; \
 	export OPENJDK_SHA256_FILE=openjdk.tar.gz.sha256; \
-	# wget -O "$OPENJDK_FILE" "$OPENJDK_URL"; \	
+	wget -O "$OPENJDK_FILE" "$OPENJDK_URL"; \	
 	wget -O "$OPENJDK_SHA256_FILE" "$OPENJDK_SHA256_URL"; \
 	HASH=$(cat $OPENJDK_SHA256_FILE); \
 	HASH="$HASH $OPENJDK_FILE"; \
